@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImageTest</string>
+    <string name="backText"><![CDATA[<]]></string>
+    <string name="nextText"><![CDATA[>]]></string>
+</resources>
