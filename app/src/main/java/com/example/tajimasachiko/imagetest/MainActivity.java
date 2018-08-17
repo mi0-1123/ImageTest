@@ -169,9 +169,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
                                     byte tmp[] = new byte[size];
                                     buf.position(0);
                                     buf.get(tmp);
-//                                    String readMsg = new String(tmp, "UTF-8");
-                                    int intread = -1;
-                                    intread = ByteBuffer.wrap(tmp).getInt();
+                                    String readMsg = new String(tmp, "UTF-8");
                                     try {
                                         Thread.sleep(100);
                                     } catch (InterruptedException e) {
@@ -179,10 +177,10 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
                                     }
 
                                     // null以外なら表示
-                                    if (intread != -1 ) {
+                                    if (readMsg.trim() != null && !readMsg.trim().equals("")) {
                                         valueMsg = new Message();
                                         valueMsg.what = VIEW_INPUT;
-                                        valueMsg.obj = intread;
+                                        valueMsg.obj = readMsg;
                                         iHandler.sendMessage(valueMsg);
                                     }
 
@@ -250,17 +248,17 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
         @Override
         public void handleMessage(Message msg) {
             int action = msg.what;
-            int msgNum = (int)msg.obj;
+            String msgStr = (String)msg.obj;
 
             if(action == VIEW_INPUT){
-                switch (msgNum){
-                    case 0:
+                switch (msgStr){
+                    case "3":
                         itemImage.setImageResource(R.drawable.coin);
                         break;
-                    case 1:
+                    case "1":
                         itemImage.setImageResource(R.drawable.star);
                         break;
-                    case 2:
+                    case "2":
                         itemImage.setImageResource(R.drawable.mash);
                         break;
 
