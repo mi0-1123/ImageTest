@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
     private final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     /* デバイス名 */
-    private final String DEVICE_NAME = "RNBT-205F";
+    private final String DEVICE_NAME = "RNBT-B8D8";
 
     /* Soket */
     private BluetoothSocket mSocket;
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
                                         valueMsg = new Message();
                                         valueMsg.what = VIEW_INPUT;
                                         valueMsg.obj = intread;
-                                        mHandler.sendMessage(valueMsg);
+                                        iHandler.sendMessage(valueMsg);
                                     }
 
                                     lastByte = 0x00;
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
     /**
      * 描画処理はHandlerでおこなう
      */
-    Handler mHandler = new Handler() {
+    Handler iHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             int action = msg.what;
@@ -274,6 +274,22 @@ public class MainActivity extends AppCompatActivity implements Runnable, View.On
             }
         }
     };
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int action = msg.what;
+            String msgStr = (String)msg.obj;
+            if(action == VIEW_INPUT){
+                mInputTextView.setText(msgStr);
+            }
+            else if(action == VIEW_STATUS){
+                mStatusTextView.setText(msgStr);
+            }
+        }
+    };
+
+
 
 
 }
